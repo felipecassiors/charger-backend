@@ -1,27 +1,28 @@
-plugins {
-	id 'org.springframework.boot' version '2.2.2.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-	id 'java'
-}
+// https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.1.11.RELEASE&packaging=jar&jvmVersion=1.8&groupId=dev.felipesantos&artifactId=charger&name=charger&description=Demo%20project%20for%20Spring%20Boot&packageName=dev.felipesantos.charger&dependencies=lombok,configuration-processor,data-rest,data-mongodb,web,devtools
 
+plugins {
+  id 'org.springframework.boot' version '2.1.11.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+  id 'java'
+}
 group = 'dev.felipesantos'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
-
 configurations {
-	developmentOnly
-	runtimeClasspath {
-		extendsFrom developmentOnly
-	}
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+  developmentOnly
+  runtimeClasspath {
+	extendsFrom developmentOnly
+  }
+  compileOnly {
+	extendsFrom annotationProcessor
+  }
 }
-
 repositories {
-	mavenCentral()
+  	mavenCentral()
+  	maven {
+		url "https://oss.jfrog.org/artifactory/oss-snapshot-local/"
+	}
 }
-
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
@@ -30,12 +31,10 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
-	testImplementation 'org.springdoc:springdoc-openapi-ui'
-}
-
-test {
-	useJUnitPlatform()
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// https://oss.jfrog.org/artifactory/webapp/#/artifacts/browse/simple/General/oss-snapshot-local/io/springfox
+	implementation 'io.springfox:springfox-swagger2:3.0.0-SNAPSHOT'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0-SNAPSHOT'
+	implementation 'io.springfox:springfox-data-rest:3.0.0-SNAPSHOT'
+	implementation 'io.springfox:springfox-bean-validators:3.0.0-SNAPSHOT'
 }
