@@ -11,4 +11,6 @@ public class Record {
     private String id;
 
     private Float value;
+
+    private String name;
 }
